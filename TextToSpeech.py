@@ -1,7 +1,13 @@
 from elevenlabslib import *
-
+from pathlib import Path
+from dotenv import load_dotenv
+import os
 def TextToSpeech(userID="ELEVENLABS_USER_ID", voice_name="Dumbledore", text="Test",  Filename="file"):
-    
+    load_dotenv()
+    userID = os.getenv('ELEVENLABS_USER_ID')
+
+    Path("resources/Mp3").mkdir(parents=True, exist_ok=True)
+
     voices = {"Biden": "yMfnfIOzluxodSBLGa9R",
               "Trump": "PSv9S5rmNIg1ozYKAzDx",
               "Freeman": "G0M1WHULWsL10PLWylPH",
@@ -13,8 +19,8 @@ def TextToSpeech(userID="ELEVENLABS_USER_ID", voice_name="Dumbledore", text="Tes
 
     user = ElevenLabsUser(userID)
     voice = user.get_voice_by_ID(voices[voice_name]) 
-    print("downloading")
-    voice.Download_audio_bytes(text, filename=f"{Filename}.mp3")
+    print(f'Creating {Filename}.mp3 file')
+    voice.Download_audio_bytes(text, filename=f"resources/Mp3/{Filename}.mp3")
 
 
 

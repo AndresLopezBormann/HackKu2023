@@ -9,10 +9,13 @@ def ChatGPT_Prompt(chat_prompt, text):
     # Setting up the OpenAI API credentials
     openai.api_key = os.getenv('OPENAI_API_KEY')
 
-    answer = openai.Completion.create(
+    answer = openai.ChatCompletion.create(
         #Parameters at:  https://platform.openai.com/docs/api-reference/chat/create
-        model="text-davinci-003",
-        prompt=f"{chat_prompt}: \n {text}",
+        model="gpt-3.5-turbo",
+        messages=[
+        {"role": "user", "content": f'{chat_prompt}: "{text}"'},
+        ],
+        # prompt=f"{chat_prompt}: \n {text}",
         max_tokens = 1000,
         temperature = 0.5
 

@@ -9,7 +9,10 @@ from pathlib import Path
 
 def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
     Path("resources/Result").mkdir(parents=True, exist_ok=True)
-    clip1 = VideoFileClip(video1)
+    if video1.lower().endswith(('.png', '.jpg', '.jpeg')):
+        clip1 = ImageClip(video1)
+    else: 
+        clip1 = VideoFileClip(video1)
     clip2 = VideoFileClip(video2)
     # make quality worse
     if clip1.h <= 1100:
@@ -57,7 +60,7 @@ def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
         subtitle_clip = subtitle_clip.set_start(start_time)
         subtitle_clip = subtitle_clip.set_duration(audio_clip.duration)
         subtitle_clip = subtitle_clip.set_end(start_time + audio_clip.duration)
-        subtitle_clip = subtitle_clip.set_position(('center', 'top'))
+        subtitle_clip = subtitle_clip.set_position(('center', 300))
 
         # Add the audio and subtitle to the video
         updated_clip = CompositeVideoClip([final_clip, subtitle_clip])
