@@ -74,7 +74,7 @@ You can [download](https://github.com/AndresLopezBormann/HackKu2023) the latest 
 
 ## Video Creation software app
 
-Racer is a [Video creation software app](https://en.wikipedia.org/wiki/Video_editing_software). If you liked or disliked using this app, let me know! Send us an email at <Alopezb1@ku.edu>, <BenCLottes@ku.edu>,  or <A008P058@ku.edu> about anything you'd want to say about this software. We'd really appreciate it!
+Racer is a [Video creation software app](https://en.wikipedia.org/wiki/Video_editing_software). If you liked or disliked using this app, let me know! Send us an email at <Alopezb1@ku.edu>, <BenCLottes@ku.edu>, <A008P058@ku.edu>, or <AlexisGray23@ku.edu> about anything you'd want to say about this software. We'd really appreciate it!
 
 <br>
 
