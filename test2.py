@@ -1,43 +1,41 @@
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
+from PyQt6 import QtCore, QtGui
 
-import sys
+class MainWindow(QtGui.QMainWindow):
+    def __init__(self, parent=None):
+        super(MainWindow, self).__init__(parent)
+        self.central_widget = QtGui.QStackedWidget()
+        self.setCentralWidget(self.central_widget)
+        login_widget = LoginWidget(self)
+        login_widget.button.clicked.connect(self.login)
+        self.central_widget.addWidget(login_widget)
+    def login(self):
+        logged_in_widget = LoggedWidget(self)
+        self.central_widget.addWidget(logged_in_widget)
+        self.central_widget.setCurrentWidget(logged_in_widget)
 
-from random import randint
+
+class LoginWidget(QtGui.QWidget):
+    def __init__(self, parent=None):
+        super(LoginWidget, self).__init__(parent)
+        layout = QtGui.QHBoxLayout()
+        self.button = QtGui.QPushButton('Login')
+        layout.addWidget(self.button)
+        self.setLayout(layout)
+        # you might want to do self.button.click.connect(self.parent().login) here
 
 
-class AnotherWindow(QWidget):
-    """
-    This "window" is a QWidget. If it has no parent, it
-    will appear as a free-floating window as we want.
-    """
-    def __init__(self):
-        super().__init__()
-        layout = QVBoxLayout()
-        self.label = QLabel("Another Window % d" % randint(0,100))
+class LoggedWidget(QtGui.QWidget):
+    def __init__(self, parent=None):
+        super(LoggedWidget, self).__init__(parent)
+        layout = QtGui.QHBoxLayout()
+        self.label = QtGui.QLabel('logged in!')
         layout.addWidget(self.label)
         self.setLayout(layout)
 
 
-class MainWindow(QMainWindow):
 
-    def __init__(self):
-        super().__init__()
-        self.w = None  # No external window yet.
-        self.button = QPushButton("Push for Window")
-        self.button.clicked.connect(self.show_new_window)
-        self.setCentralWidget(self.button)
-
-    def show_new_window(self, checked):
-        if self.w is None:
-            self.w = AnotherWindow()
-            self.w.show()
-
-        else:
-            self.w.close()  # Close window.
-            self.w = None  # Discard reference.
-
-
-app = QApplication(sys.argv)
-w = MainWindow()
-w.show()
-app.exec()
+if __name__ == '__main__':
+    app = QtGui.QApplication([])
+    window = MainWindow()
+    window.show()
+    app.exec_()
