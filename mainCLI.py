@@ -4,6 +4,7 @@ from FreeTextToSpeech import TextToMp3
 from YoutubeDownloader import YoutubeDownloader
 from SentenceSplitter import SentenceSplitter
 from VideoBuilder import BuildVideo
+from Cleaner import Cleaner
 
 def main():
 
@@ -39,10 +40,11 @@ def main():
     youtube_url = input("Enter the YouTube url to play in the background: ")
     YoutubeDownloader(youtube_url)
 
-    BuildVideo('resources/BackgroundVideo.mp4', 'resources/BackgroundVideo.mp4', text_list, 'resources/Mp3/', 'final_video.mp4')
-
     #Creates the Video from the mp4 and mp3 files
-    #MOVIE_MAKER_FUNC(resourcespath, num_sentences)
+    BuildVideo('resources/Mp4/BackgroundVideo.mp4', 'resources/Mp4/BackgroundVideo.mp4', text_list, 'resources/Mp3/', 'final_video.mp4')
+    
+    #Deletes Mp3 and background Mp4 video
+    Cleaner()
 
 
 if __name__ == '__main__':

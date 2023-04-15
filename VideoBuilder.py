@@ -1,12 +1,14 @@
 
 from moviepy.editor import *
 from SentenceSplitter import SentenceSplitter
+from pathlib import Path
 
 # Text in MoviePy depends on ImageMagick and Wand - https://imagemagick.org/script/download.php#windows
 
 # currently depends on folder of audio clips of single sentences
 
 def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
+    Path("resources/Result").mkdir(parents=True, exist_ok=True)
     clip1 = VideoFileClip(video1)
     clip2 = VideoFileClip(video2)
     # make quality worse
@@ -67,7 +69,9 @@ def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
         audio_index += 1
 
     # Write the final video to disk
-    final_clip.write_videofile(final_video, fps=24, threads=16, audio_codec="aac") 
+    final_clip.write_videofile("resources/Result/"+final_video, fps=24, threads=16, audio_codec="aac") 
+    clip1.close()
+    clip2.close()
 
 
 if __name__ == '__main__':
