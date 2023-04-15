@@ -2,7 +2,7 @@
 from moviepy.editor import *
 
 
-def build_video(video1, video2, final_video):
+def BuildVideo(video1, video2, final_video):
     # make quality worse
     clip1 = video1.resize(width=1920/2, height=1080/2)
     clip2 = video2.resize(width=1920/2, height=1080/2)
@@ -22,4 +22,4 @@ if __name__ == '__main__':
     clip2 = VideoFileClip('resources/video.mp4')
 
     # Write the final video to disk
-    build_video(clip1, clip2, 'final_video.mp4')
+    BuildVideo(clip1, clip2, 'final_video.mp4')
