@@ -5,3 +5,5 @@ moviepy
 pytube
 elevenlabslib
 gtts
+
+Wand
