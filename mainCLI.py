@@ -6,6 +6,7 @@ from YoutubeDownloader import YoutubeDownloader
 from SentenceSplitter import SentenceSplitter
 from VideoBuilder import BuildVideo
 from Cleaner import Cleaner
+import os
 def main():
 
     #Gets Required information from user
@@ -26,7 +27,16 @@ def main():
     # text = ChatGPT_Prompt(SPELLING_AND_GRAMMAR_FIX, text)['choices'][0]['message']['content']
 
     text = ChatGPT_Prompt(ChatGPT_prompt, text)['choices'][0]['message']['content']
+    file = open("resources/text_promt.txt", "w")
+    file.write(text)
+    file.close()
 
+    input("Check resources/text_promt.txt if you want to make any changes! When you are done press enter to continue...")
+    file = open("resources/text_promt.txt", "r")
+    text = file.read()
+    file.close()
+    os.remove("resources/text_promt.txt")
+    print(text)
     # Splits the text into sentences
     text_list = SentenceSplitter(text)
     num_sentences = len(text_list)
