@@ -20,8 +20,11 @@ def main():
     for i in range(num_comments):
         comments += f"\n{reddit_object['comments'][i]['comment_body']}"
     text = f"Title: {reddit_object['title']}\nBody: {reddit_object['body']}\nComments: {comments}"
+
+    #Commented out these 3 lines to avoid costs
+    # SPELLING_AND_GRAMMAR_FIX = "Fix the spelling and punctuation of this post" 
+    # text = ChatGPT_Prompt(SPELLING_AND_GRAMMAR_FIX, text)
     
-    #Commented out to avoid costs
     # text = ChatGPT_Prompt(ChatGPT_prompt, text) 
 
     # Splits the text into sentences
