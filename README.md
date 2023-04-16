@@ -14,15 +14,15 @@
   <br>
   A-nd
   <br>
-  C-hatGPT
+  C-hatGPT with
   <br>
   E-levenLabs
   <br>
-  R-
+  R-ecitation
   <br><br>
 </h1>
 
-<h4 align="center">A content creation tool used for automated video making.</h4>
+<h4 align="center">A content creation tool used for speedy automated video making.</h4>
 
 
 <p align="center">
