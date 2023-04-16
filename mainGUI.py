@@ -5,7 +5,7 @@ import sys
 # Import QtCore and QtWidgets
 from PyQt6.QtCore import QUrl, Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLineEdit, QFormLayout, QWidget, QStackedWidget, QSpinBox, QPlainTextEdit, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QGridLayout, QSystemTrayIcon
-from PyQt6.QtMultimedia import QMediaPlayer
+from PyQt6.QtMultimedia import QMediaPlayer, QAudioOutput
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtGui import QIcon, QFont
 
@@ -422,8 +422,11 @@ class FinalVideoWidget(QWidget):
 
         # Create movie 
         self.media_player = QMediaPlayer()
+        self.audio_output = QAudioOutput()
+        self.media_player.setAudioOutput(self.audio_output)
         self.media_player.setSource(QUrl.fromLocalFile("resources/Result/final_video.mp4"))
         self.video_widget = QVideoWidget()
+        self.audio_output.setVolume(50)
         
         self.media_player.setVideoOutput(self.video_widget)
         self.video_widget.adjustSize()
