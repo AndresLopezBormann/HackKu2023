@@ -10,6 +10,7 @@ from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtGui import QIcon, QFont
 
 # Import functions from other classes
+from Cleaner import Cleaner
 from RedditGetter import GetRedditPost
 from ChatGPT import ChatGPT_Prompt
 from YoutubeDownloader import YoutubeDownloader
@@ -17,10 +18,10 @@ from VideoBuilder import BuildVideo
 from TextToSpeech import TextToSpeech
 from SentenceSplitter import SentenceSplitter
 
-PRIMARY_COLOR = "#634B66"
-PRIMARY_ALT_COLOR = "#9590A8"
-BACKGROUND_COLOR = "#E5FFDE"
-BACKGROUND_ALT_COLOR = ""
+
+PRIMARY_COLOR = "#576CBC"
+PRIMARY_ALT_COLOR = "#576CBC"
+BACKGROUND_COLOR = "#BDCDD6"
 LIGHT_COLOR = "#FFFFFF"
 
 # Create a layout for Home Page
@@ -40,7 +41,7 @@ class HomeWidget(QWidget):
 
         # Label
         self.label = QLabel("RACER")
-        self.label.setFont(QFont("Helvetica", 36))
+        self.label.setFont(QFont("Helvetica", pointSize=80, weight=750, italic=True ,))
         self.label.setStyleSheet(f"color: {PRIMARY_COLOR};" )
         home_layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignHCenter)
         
@@ -94,7 +95,7 @@ class HomeWidget(QWidget):
         self.submit_button = QPushButton("Submit")
         self.submit_button.setFixedWidth(300)
         self.submit_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 100;"
             f"border: 5px solid {PRIMARY_ALT_COLOR};"
@@ -140,7 +141,7 @@ class FinalTextWidget(QWidget):
         self.backButton = QPushButton("Back")
         self.backButton.setFont(QFont("Arial", 24))
         self.backButton.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 50;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -197,7 +198,7 @@ class FinalTextWidget(QWidget):
         # Redo Button
         self.redo_button = QPushButton("Redo")
         self.redo_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 50;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -211,7 +212,7 @@ class FinalTextWidget(QWidget):
         self.continueButton = QPushButton("Continue")
         self.continueButton.setFont(QFont("Arial", 24))
         self.continueButton.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 50;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -254,7 +255,7 @@ class VoiceVideoWidget(QWidget):
         self.backButton = QPushButton("Go Back")
         self.backButton.setFont(QFont("Arial", 24))
         self.backButton.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 50;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -309,7 +310,7 @@ class VoiceVideoWidget(QWidget):
         self.create_video_button = QPushButton("Create Video")
         self.create_video_button.setFont(QFont("Arial", 24))
         self.create_video_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 50;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -355,7 +356,7 @@ class VoiceVideoWidget(QWidget):
             )
             button.setFont(QFont("Arial", 24))
             button.setStyleSheet(
-                "color: #f1faee;"
+                f"color: {LIGHT_COLOR};"
                 f"background-color: {PRIMARY_COLOR};"
                 "height: 50;"
                 f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -384,7 +385,7 @@ class VoiceVideoWidget(QWidget):
             if j == i:
                 # Enable button
                 self.buttons[j].setStyleSheet(
-                "color: #f1faee;"
+                f"color: {LIGHT_COLOR};"
                 f"background-color: {PRIMARY_ALT_COLOR};"
                 "height: 50;"
                 f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -397,7 +398,7 @@ class VoiceVideoWidget(QWidget):
             else:
                 # Unenable button
                 self.buttons[j].setStyleSheet(
-                "color: #f1faee;"
+                f"color: {LIGHT_COLOR};"
                 f"background-color: {PRIMARY_COLOR};"
                 "height: 50;"
                 f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -429,7 +430,7 @@ class FinalVideoWidget(QWidget):
         self.start_button = QPushButton("Start")
         self.start_button.setFont(QFont("Arial", 24))
         self.start_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 50;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -440,7 +441,7 @@ class FinalVideoWidget(QWidget):
         self.pause_button = QPushButton("Pause")
         self.pause_button.setFont(QFont("Arial", 24))
         self.pause_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 50;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -451,7 +452,7 @@ class FinalVideoWidget(QWidget):
         self.stop_button = QPushButton("Stop")
         self.stop_button.setFont(QFont("Arial", 24))
         self.stop_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 50;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -471,7 +472,7 @@ class FinalVideoWidget(QWidget):
         self.back_button = QPushButton("Go Back")
         self.back_button.setFont(QFont("Arial", 24))
         self.back_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 75;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -484,7 +485,7 @@ class FinalVideoWidget(QWidget):
         self.upload_to_youtube_button = QPushButton("Upload to Youtube")
         self.upload_to_youtube_button.setFont(QFont("Arial", 24))
         self.upload_to_youtube_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 75;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -497,7 +498,7 @@ class FinalVideoWidget(QWidget):
         self.upload_to_tiktok_button = QPushButton("Upload to Titok")
         self.upload_to_tiktok_button.setFont(QFont("Arial", 24))
         self.upload_to_tiktok_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 75;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -510,7 +511,7 @@ class FinalVideoWidget(QWidget):
         self.new_video_button = QPushButton("New Video")
         self.new_video_button.setFont(QFont("Arial", 24))
         self.new_video_button.setStyleSheet(
-            "color: #f1faee;"
+            f"color: {LIGHT_COLOR};"
             f"background-color: {PRIMARY_COLOR};"
             "height: 75;"
             f"border: 5 solid {PRIMARY_ALT_COLOR};"
@@ -583,7 +584,6 @@ class MainWindow(QMainWindow):
         self.central_widget.addWidget(self.final_text_widget)
         self.central_widget.addWidget(self.voice_video_widget)
         self.central_widget.addWidget(self.final_video_widget)
-        self.switchPage(3)
 
     # Make text with prompt 
     def makeText(self, content, prompt):
@@ -675,10 +675,14 @@ class MainWindow(QMainWindow):
         TextToSpeech(voice_name=voice, text=content,  Filename="FullAudio")
 
         # Get the video
+        print(youtube_url)
         YoutubeDownloader(youtube_url)
 
         # Build Video
         BuildVideo(f'resources/Images/{voice}.jpg', 'resources/Mp4/BackgroundVideo.mp4', content_list, 'resources/Mp3/', 'final_video.mp4' )
+
+        # Clean up files
+        Cleaner()
 
         # Remove central widget
         self.central_widget.removeWidget(self.final_video_widget)
