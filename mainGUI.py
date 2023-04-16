@@ -7,7 +7,7 @@ from PyQt6.QtCore import QUrl, Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLineEdit, QFormLayout, QWidget, QStackedWidget, QSpinBox, QPlainTextEdit, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QGridLayout, QSystemTrayIcon
 from PyQt6.QtMultimedia import QMediaPlayer
 from PyQt6.QtMultimediaWidgets import QVideoWidget
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QFont
 
 # Import functions from other classes
 from RedditGetter import GetRedditPost
@@ -30,24 +30,56 @@ class HomeWidget(QWidget):
 
         # Label
         self.label = QLabel("RACER")
+        self.label.setFont(QFont("Helvetica", 36))
+        self.label.setStyleSheet(
+            "color: rgb(245, 242, 213);" 
+        )
+        home_layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignHCenter)
+        
         
         # Reddit Url
         self.reddit_url_input = QLineEdit()
+        self.reddit_url_input.setFont(QFont("Arial", 24))
+        self.reddit_url_input.setStyleSheet(
+            "background-color: rgb(93, 122, 148);"
+            "color:rgb(184, 155, 94)"
+        )
+        self.reddit_url_input.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.reddit_url_input.setPlaceholderText("Enter URL of Reddit Post")
+        self.reddit_url_input.setMaximumWidth(1000)
         self.reddit_url_input.textChanged.connect(self.updateUrl)
         home_layout.addWidget(self.reddit_url_input, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         # Number of Comments
         self.number_of_comments_input = QSpinBox()
+        self.number_of_comments_input.setFont(QFont("Arial", 24))
+        self.number_of_comments_input.setStyleSheet(
+            "background-color: rgb(93, 122, 148);"
+            "color:rgb(184, 155, 94)"
+        )
+        self.number_of_comments_input.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.number_of_comments_input.setSpecialValueText("Enter number of comments")
         self.number_of_comments_input.valueChanged.connect(self.updateInput)
         home_layout.addWidget(self.number_of_comments_input, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         # Chapt GPT Prompt
-        self.chat_gpt_prompt_input = QPlainTextEdit()
+        self.chat_gpt_prompt_input = QLineEdit()
+        self.chat_gpt_prompt_input.setFont(QFont("Arial", 24))
+        self.chat_gpt_prompt_input.setStyleSheet(
+            "background-color: rgb(93, 122, 148);"
+            "color:rgb(184, 155, 94)"
+        )
+        self.chat_gpt_prompt_input.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.chat_gpt_prompt_input.setPlaceholderText("Enter Chat GPT Prompt")
         self.chat_gpt_prompt_input.textChanged.connect(self.updatePrompt)
         home_layout.addWidget(self.chat_gpt_prompt_input, alignment=Qt.AlignmentFlag.AlignVCenter)
 
         # Submit button
         self.submit_button = QPushButton("Submit")
+        self.submit_button.setStyleSheet(
+            "background-color:rgb(245, 242, 213)"
+        )
+        self.submit_button.setFont(QFont("Arial", 36))
         home_layout.addWidget(self.submit_button, alignment=Qt.AlignmentFlag.AlignVCenter)
         
         
@@ -65,9 +97,9 @@ class HomeWidget(QWidget):
         self.number_of_comments = value
 
     # Get text for prompt 
-    def updatePrompt(self):
+    def updatePrompt(self, text):
         # Get the text
-        self.chat_gpt_prompt = self.chat_gpt_prompt_input.toPlainText()
+        self.chat_gpt_prompt = text
 
 # Create a widget for editing final prompt
 class FinalTextWidget(QWidget):
@@ -286,9 +318,12 @@ class MainWindow(QMainWindow):
         # Super intialize
         super().__init__()
 
-        # Window Ttile
-        self.setWindowTitle("Racer")
+        # Set BackGround Color
+        self.setStyleSheet("background-color: rgb(8, 81, 120);")
 
+        # Window Ttile
+        self.setWindowTitle("RACER")
+        
         # Set central widge
         self.central_widget = QStackedWidget()
 
