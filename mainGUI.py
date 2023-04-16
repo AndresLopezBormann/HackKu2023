@@ -4,9 +4,10 @@ import sys
 
 # Import QtCore and QtWidgets
 from PyQt6.QtCore import QUrl, Qt
-from PyQt6.QtWidgets import QApplication, QMainWindow, QLineEdit, QFormLayout, QWidget, QStackedWidget, QSpinBox, QPlainTextEdit, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QGridLayout, QSizePolicy
+from PyQt6.QtWidgets import QApplication, QMainWindow, QLineEdit, QFormLayout, QWidget, QStackedWidget, QSpinBox, QPlainTextEdit, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QGridLayout, QSystemTrayIcon
 from PyQt6.QtMultimedia import QMediaPlayer
 from PyQt6.QtMultimediaWidgets import QVideoWidget
+from PyQt6.QtGui import QIcon
 
 # Import functions from other classes
 from RedditGetter import GetRedditPost
@@ -27,6 +28,9 @@ class HomeWidget(QWidget):
         self.number_of_comments = 0
         self.chat_gpt_prompt = ""
 
+        # Label
+        self.label = QLabel("RACER")
+        
         # Reddit Url
         self.reddit_url_input = QLineEdit()
         self.reddit_url_input.textChanged.connect(self.updateUrl)
@@ -392,6 +396,11 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     # Set Application
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("RACER.png"))
+
+    # Set Icon
+    trayIcon = QSystemTrayIcon(QIcon('RACER.png'), parent=app)
+    trayIcon.show()
 
     # Set Window
     window = MainWindow()
