@@ -8,7 +8,7 @@
 <h1 align="center">
   𝙍𝘼𝘾𝙀𝙍
   <br><br>
-  <a href="https://github.com/AndresLopezBormann/HackKu2023"><img src="resources/logo.jpg" alt="Racer" width="200"></a>
+  <a href="https://github.com/AndresLopezBormann/HackKu2023"><img src="resources/Images/logo.jpg" alt="Racer" width="200"></a>
   <br><br>
   R-eddit
   <br>
@@ -33,7 +33,7 @@
 </p>
 <br>
 <div align="center">
-<img src="resources/Racer.jpg" alt="Racer" width="600"></a>
+<img src="resources/Images/Racer.jpg" alt="Racer" width="600"></a>
 </div>
 <br>
 

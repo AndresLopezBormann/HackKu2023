@@ -32,8 +32,8 @@ def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
         final_clip = final_clip.resize(height=960)
 
     audio = AudioFileClip(path_to_audio + "FullAudio.mp3")
-    final_clip = final_clip.set_audio(audio)
-    final_clip = final_clip.set_duration(audio.duration)
+    # final_clip = final_clip.set_audio(audio)
+    final_clip = final_clip.set_duration(audio.duration + (len(text_arr) * .35))
 
     # make audio and subtitles
     start_time = 0
@@ -58,16 +58,17 @@ def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
         # Create the subtitle clip
         subtitle_clip = TextClip(modified_text, fontsize=25, color='white', bg_color='black', font='Arial-Bold')
         subtitle_clip = subtitle_clip.set_start(start_time)
-        subtitle_clip = subtitle_clip.set_duration(audio_clip.duration)
-        subtitle_clip = subtitle_clip.set_end(start_time + audio_clip.duration)
+        subtitle_clip = subtitle_clip.set_duration(audio_clip.duration+.35)
+        subtitle_clip = subtitle_clip.set_end(start_time + audio_clip.duration+.35)
         subtitle_clip = subtitle_clip.set_position(('center', 300))
 
         # Add the audio and subtitle to the video
-        updated_clip = CompositeVideoClip([final_clip, subtitle_clip])
-        #updated_clip = CompositeVideoClip([clip1, audio_clip])
+        updated_clip = CompositeVideoClip([final_clip, subtitle_clip], use_bgclip=True)
+        # updated_clip = CompositeAudioClip([updated_clip, audio_clip])
+        updated_clip = updated_clip.set_audio(audio)
 
         # Increment the start time
-        start_time += audio_clip.duration
+        start_time += audio_clip.duration+.35
         final_clip = updated_clip
         audio_index += 1
 

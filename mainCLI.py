@@ -48,8 +48,8 @@ def main():
     print("Voice Chosen: " + voice_name[voice_choice])
     for i in range(num_sentences):
         TextToSpeech(voice_name=voice_name[voice_choice], text=text_list[i], Filename="Sentence"+str(i+1))
-        # TextToMp3(text_list[i], "Sentence"+str(i+1) )
-    # TextToMp3(text, "FullAudio")
+    #     # TextToMp3(text_list[i], "Sentence"+str(i+1) )
+    # # TextToMp3(text, "FullAudio")
     TextToSpeech(voice_name=voice_name[voice_choice], text=text, Filename="FullAudio")
 
     #Downloads Background Youtube Video
@@ -60,7 +60,7 @@ def main():
     BuildVideo(f'resources/Images/{voice_name[voice_choice]}.jpg', 'resources/Mp4/BackgroundVideo.mp4', text_list, 'resources/Mp3/', 'final_video.mp4')
     
     #Deletes Mp3 and background Mp4 video
-    Cleaner()
+    # Cleaner()
 
 
 if __name__ == '__main__':
