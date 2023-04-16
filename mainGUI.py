@@ -17,6 +17,12 @@ from VideoBuilder import BuildVideo
 from TextToSpeech import TextToSpeech
 from SentenceSplitter import SentenceSplitter
 
+PRIMARY_COLOR = "#634B66"
+PRIMARY_ALT_COLOR = "#9590A8"
+BACKGROUND_COLOR = "#E5FFDE"
+BACKGROUND_ALT_COLOR = ""
+LIGHT_COLOR = "#FFFFFF"
+
 # Create a layout for Home Page
 class HomeWidget(QWidget):
     # Intialize FUnction
@@ -35,56 +41,67 @@ class HomeWidget(QWidget):
         # Label
         self.label = QLabel("RACER")
         self.label.setFont(QFont("Helvetica", 36))
-        self.label.setStyleSheet(
-            "color: rgb(245, 242, 213);" 
-        )
+        self.label.setStyleSheet(f"color: {PRIMARY_COLOR};" )
         home_layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignHCenter)
         
         
         # Reddit Url
         self.reddit_url_input = QLineEdit()
+        self.reddit_url_input.setFixedWidth(1500)
         self.reddit_url_input.setFont(QFont("Arial", 24))
         self.reddit_url_input.setStyleSheet(
-            "background-color: rgb(93, 122, 148);"
-            "color:rgb(184, 155, 94)"
+            f"background-color: {LIGHT_COLOR};"
+            f"color: {PRIMARY_ALT_COLOR};"
+            "height: 75;"
+            f"border: 5px solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10px;"
         )
-        self.reddit_url_input.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.reddit_url_input.setPlaceholderText("Enter URL of Reddit Post")
-        self.reddit_url_input.setMaximumWidth(1000)
         self.reddit_url_input.textChanged.connect(self.updateUrl)
-        home_layout.addWidget(self.reddit_url_input, alignment=Qt.AlignmentFlag.AlignVCenter)
+        home_layout.addWidget(self.reddit_url_input, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # Number of Comments
         self.number_of_comments_input = QSpinBox()
+        self.number_of_comments_input.setFixedWidth(600)
         self.number_of_comments_input.setFont(QFont("Arial", 24))
         self.number_of_comments_input.setStyleSheet(
-            "background-color: rgb(93, 122, 148);"
-            "color:rgb(184, 155, 94)"
+            f"background-color: {LIGHT_COLOR};"
+            f"color: {PRIMARY_ALT_COLOR};"
+            "height: 75;"
+            f"border: 5px solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10px;"
         )
-        self.number_of_comments_input.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.number_of_comments_input.setSpecialValueText("Enter number of comments")
         self.number_of_comments_input.valueChanged.connect(self.updateInput)
-        home_layout.addWidget(self.number_of_comments_input, alignment=Qt.AlignmentFlag.AlignVCenter)
+        home_layout.addWidget(self.number_of_comments_input, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # Chapt GPT Prompt
         self.chat_gpt_prompt_input = QLineEdit()
+        self.chat_gpt_prompt_input.setFixedWidth(1500)
         self.chat_gpt_prompt_input.setFont(QFont("Arial", 24))
         self.chat_gpt_prompt_input.setStyleSheet(
-            "background-color: rgb(93, 122, 148);"
-            "color:rgb(184, 155, 94)"
+            f"background-color: {LIGHT_COLOR};"
+            f"color: {PRIMARY_ALT_COLOR};"
+            "height: 75;"
+            f"border: 5px solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10px;"
         )
-        self.chat_gpt_prompt_input.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.chat_gpt_prompt_input.setPlaceholderText("Enter Chat GPT Prompt")
         self.chat_gpt_prompt_input.textChanged.connect(self.updatePrompt)
-        home_layout.addWidget(self.chat_gpt_prompt_input, alignment=Qt.AlignmentFlag.AlignVCenter)
+        home_layout.addWidget(self.chat_gpt_prompt_input, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # Submit button
         self.submit_button = QPushButton("Submit")
+        self.submit_button.setFixedWidth(300)
         self.submit_button.setStyleSheet(
-            "background-color:rgb(245, 242, 213)"
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 100;"
+            f"border: 5px solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10px;"
         )
         self.submit_button.setFont(QFont("Arial", 36))
-        home_layout.addWidget(self.submit_button, alignment=Qt.AlignmentFlag.AlignVCenter)
+        home_layout.addWidget(self.submit_button, alignment=Qt.AlignmentFlag.AlignCenter)
         
         
         # Set the layoout
@@ -113,7 +130,7 @@ class FinalTextWidget(QWidget):
         super().__init__(parent)
 
         # Create layout
-        layout = QFormLayout()
+        layout = QGridLayout()
 
         # Intialize values
         self.final_text = ""
@@ -121,25 +138,90 @@ class FinalTextWidget(QWidget):
 
         # Back Button
         self.backButton = QPushButton("Back")
-        layout.addRow(self.backButton)
+        self.backButton.setFont(QFont("Arial", 24))
+        self.backButton.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-right: 800;"
+            "margin-left: 800;"
+            "margin-top: 50;"
+            "margin-bottom: 10;"
+        )
+        layout.addWidget(self.backButton, 0, 0, 1, 2)
+
+        # Final Text Editor Label         
+        self.text_label = QLabel("Edit Your Generated Text:")
+        self.text_label.setFont(QFont("Arial", pointSize=32, weight=750, italic=True ,))
+        self.text_label.setStyleSheet(f"color: {PRIMARY_COLOR};" )
+        layout.addWidget(self.text_label, 1, 0, 1, 2, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # Final Text Editor
         self.final_text_input = QPlainTextEdit()
+        self.final_text_input.setFont(QFont("Arial", 24))
+        self.final_text_input.setStyleSheet(
+            f"color: {PRIMARY_COLOR};"
+            f"background-color: {LIGHT_COLOR};"
+            "height: 100;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+        )
+        self.final_text_input.setFixedHeight(300)
+        self.final_text_input.setFixedWidth(1300)
         self.final_text_input.textChanged.connect(self.updateFinalText)
-        layout.addRow("Final Text", self.final_text_input)
+        layout.addWidget(self.final_text_input,2,0, 1, 2, alignment=Qt.AlignmentFlag.AlignCenter)
+
+        # Redo Prompt Label        
+        self.redo_prompt_label = QLabel("Choose if you want to modify your text with a new prompt")
+        self.redo_prompt_label.setFont(QFont("Arial", pointSize=32, weight=750, italic=True ,))
+        self.redo_prompt_label.setStyleSheet(f"color: {PRIMARY_COLOR};" )
+        layout.addWidget(self.redo_prompt_label, 3, 0, 1, 1, alignment=Qt.AlignmentFlag.AlignCenter)
 
         # Redo Prompt
         self.redo_prompt_input = QPlainTextEdit()
+        self.redo_prompt_input.setFixedHeight(60)
+        self.redo_prompt_input.setFont(QFont("Arial", 24))
+        self.redo_prompt_input.setStyleSheet(
+            f"color: {PRIMARY_COLOR};"
+            f"background-color: {LIGHT_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-right:50;"
+        )
         self.redo_prompt_input.textChanged.connect(self.updateRedoPrompt)
+        layout.addWidget(self.redo_prompt_input,4,0, 1, 1)
+
+        # Redo Button
         self.redo_button = QPushButton("Redo")
-        self.redo_widget = QHBoxLayout()
-        self.redo_widget.addWidget(self.redo_prompt_input)
-        self.redo_widget.addWidget(self.redo_button)
-        layout.addRow("Redo Prompt", self.redo_widget)
+        self.redo_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-right:50;"
+        )
+        self.redo_button.setFont(QFont("Arial", 24))
+        layout.addWidget(self.redo_button,4,1, 1, 1)
 
         # Continue button
         self.continueButton = QPushButton("Continue")
-        layout.addRow(self.continueButton)
+        self.continueButton.setFont(QFont("Arial", 24))
+        self.continueButton.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-right: 400;"
+            "margin-left: 400;"
+            "margin-top: 50;"
+            "margin-bottom: 50;"
+        )
+        layout.addWidget(self.continueButton, 5, 0, 1, 2)
 
         # Set layout
         self.setLayout(layout)
@@ -169,22 +251,74 @@ class VoiceVideoWidget(QWidget):
         self.youtube_url = ""
 
         # Back Button
-        self.backButton = QPushButton("Back")
+        self.backButton = QPushButton("Go Back")
+        self.backButton.setFont(QFont("Arial", 24))
+        self.backButton.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-right: 800;"
+            "margin-left: 800;"
+            "margin-top: 50;"
+            "margin-bottom: 10;"
+        )
         layout.addRow(self.backButton)
 
         # Create buttons for choosing voices
         self.createButtons()
 
         # Create buttons and add it to layout
-        layout.addRow("Voices", self.gridLayout)
+        self.voice = QLabel("Choose if you want to modify your text with a new prompt", alignment=Qt.AlignmentFlag.AlignHCenter)
+        self.voice.setFont(QFont("Arial", pointSize=32, weight=750, italic=True ,))
+        self.voice.setStyleSheet(
+            f"color: {PRIMARY_COLOR};"
+            "margin-top: 50;"
+            "margin-bottom: 50;")
+        layout.addRow(self.voice)
+        
+        layout.addRow(self.gridLayout)
+
+        # Label for URL
+        # Final Text Editor Label         
+        self.youtube_label = QLabel("Enter The Link To A Youtube Url For Your Creation:", alignment=Qt.AlignmentFlag.AlignHCenter)
+        self.youtube_label.setFont(QFont("Arial", pointSize=32, weight=750, italic=True ,))
+        self.youtube_label.setStyleSheet(
+            f"color: {PRIMARY_COLOR};" 
+            "margin-top: 50;"
+            "margin-bottom: 50;")                             
+        layout.addRow(self.youtube_label)
 
         # Url to youtube link
         self.youtube_url_input = QLineEdit()
+        self.youtube_url_input.setFixedHeight(60)
+        self.youtube_url_input.setFont(QFont("Arial", 24))
+        self.youtube_url_input.setStyleSheet(
+            f"color: {PRIMARY_COLOR};"
+            f"background-color: {LIGHT_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-right:50;"
+        )
         self.youtube_url_input.textChanged.connect(self.updateYoutubeUrl)
-        layout.addRow("Youtube URL", self.youtube_url_input)
+        layout.addRow(self.youtube_url_input)
 
         # Set Create Video Button
         self.create_video_button = QPushButton("Create Video")
+        self.create_video_button.setFont(QFont("Arial", 24))
+        self.create_video_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-right: 400;"
+            "margin-left: 400;"
+            "margin-top: 50;"
+            "margin-bottom: 10;"
+        )
         layout.addRow(self.create_video_button)
 
         # Set layout
@@ -219,10 +353,21 @@ class VoiceVideoWidget(QWidget):
             button.setStyleSheet(
                 "background-color : white;"
             )
+            button.setFont(QFont("Arial", 24))
+            button.setStyleSheet(
+                "color: #f1faee;"
+                f"background-color: {PRIMARY_COLOR};"
+                "height: 50;"
+                f"border: 5 solid {PRIMARY_ALT_COLOR};"
+                "border-radius: 10;"
+                "margin-top: 10;"
+                "margin-bottom: 10;"
+            )
+
             button.clicked.connect(lambda ch, i=i, name=name: self.updateChoice(name, i))
         
             # Add button to gridLayer
-            self.gridLayout.addWidget(button, row, column)
+            self.gridLayout.addWidget(button, row, column, 1, 1)
 
             # Push buttons
             self.buttons.append(button)
@@ -239,14 +384,27 @@ class VoiceVideoWidget(QWidget):
             if j == i:
                 # Enable button
                 self.buttons[j].setStyleSheet(
-                "background-color : lightblue;"
+                "color: #f1faee;"
+                f"background-color: {PRIMARY_ALT_COLOR};"
+                "height: 50;"
+                f"border: 5 solid {PRIMARY_ALT_COLOR};"
+                "border-radius: 10;"
+                "margin-top: 10;"
+                "margin-bottom: 10;"
             )
+
             # Othewise
             else:
                 # Unenable button
                 self.buttons[j].setStyleSheet(
-                    "background-color: white"
-                )
+                "color: #f1faee;"
+                f"background-color: {PRIMARY_COLOR};"
+                "height: 50;"
+                f"border: 5 solid {PRIMARY_ALT_COLOR};"
+                "border-radius: 10;"
+                "margin-top: 10;"
+                "margin-bottom: 10;"
+            )
 
 # Final Page 
 class FinalVideoWidget(QWidget):
@@ -269,12 +427,36 @@ class FinalVideoWidget(QWidget):
         self.video_widget.adjustSize()
       
         self.start_button = QPushButton("Start")
+        self.start_button.setFont(QFont("Arial", 24))
+        self.start_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+        )
         self.start_button.clicked.connect(self.start_video)
 
         self.pause_button = QPushButton("Pause")
+        self.pause_button.setFont(QFont("Arial", 24))
+        self.pause_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+        )
         self.pause_button.clicked.connect(self.pause_video)
 
         self.stop_button = QPushButton("Stop")
+        self.stop_button.setFont(QFont("Arial", 24))
+        self.stop_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 50;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+        )
         self.stop_button.clicked.connect(self.stop_video)
 
         video_layout.addWidget(self.video_widget)
@@ -287,18 +469,54 @@ class FinalVideoWidget(QWidget):
         # Buttons Layout
         # Back Button
         self.back_button = QPushButton("Go Back")
+        self.back_button.setFont(QFont("Arial", 24))
+        self.back_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 75;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-top: 50;"
+        )
         self.choice_layout.addWidget(self.back_button)
         
         # Youtube Button
         self.upload_to_youtube_button = QPushButton("Upload to Youtube")
+        self.upload_to_youtube_button.setFont(QFont("Arial", 24))
+        self.upload_to_youtube_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 75;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-top: 50;"
+        )
         self.choice_layout.addWidget(self.upload_to_youtube_button)
 
         # TikTok Button
         self.upload_to_tiktok_button = QPushButton("Upload to Titok")
+        self.upload_to_tiktok_button.setFont(QFont("Arial", 24))
+        self.upload_to_tiktok_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 75;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-top: 50;"
+        )
         self.choice_layout.addWidget(self.upload_to_tiktok_button)
 
         # New Video 
         self.new_video_button = QPushButton("New Video")
+        self.new_video_button.setFont(QFont("Arial", 24))
+        self.new_video_button.setStyleSheet(
+            "color: #f1faee;"
+            f"background-color: {PRIMARY_COLOR};"
+            "height: 75;"
+            f"border: 5 solid {PRIMARY_ALT_COLOR};"
+            "border-radius: 10;"
+            "margin-top: 50;"
+        )
         self.choice_layout.addWidget(self.new_video_button)
 
         # Add Buttons Layout
@@ -321,9 +539,9 @@ class MainWindow(QMainWindow):
     def __init__(self):
         # Super intialize
         super().__init__()
-
+        self.resize(1920,1080)
         # Set BackGround Color
-        self.setStyleSheet("background-color: rgb(8, 81, 120);")
+        self.setStyleSheet(f"background-color: {BACKGROUND_COLOR};")
 
         # Window Ttile
         self.setWindowTitle("RACER")
@@ -365,7 +583,8 @@ class MainWindow(QMainWindow):
         self.central_widget.addWidget(self.final_text_widget)
         self.central_widget.addWidget(self.voice_video_widget)
         self.central_widget.addWidget(self.final_video_widget)
-    
+        self.switchPage(3)
+
     # Make text with prompt 
     def makeText(self, content, prompt):
         # Make edited post by modifying result using the chat gpt prompt
