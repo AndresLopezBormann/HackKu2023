@@ -2,13 +2,13 @@
 from moviepy.editor import *
 from SentenceSplitter import SentenceSplitter
 from pathlib import Path
-
+import os
 # Text in MoviePy depends on ImageMagick and Wand - https://imagemagick.org/script/download.php#windows
 
 # currently depends on folder of audio clips of single sentences
-
+basedir = os.path.dirname(__file__)
 def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
-    Path("resources/Result").mkdir(parents=True, exist_ok=True)
+    Path(os.path.join(basedir, "resources", "Result")).mkdir(parents=True, exist_ok=True)
     if video1.lower().endswith(('.png', '.jpg', '.jpeg')):
         clip1 = ImageClip(video1)
     else: 
@@ -31,7 +31,7 @@ def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
         final_clip = clips_array([[clip1], [clip2]])
         final_clip = final_clip.resize(height=960)
 
-    audio = AudioFileClip(path_to_audio + "FullAudio.mp3")
+    audio = AudioFileClip(path_to_audio + "/FullAudio.mp3")
     # final_clip = final_clip.set_audio(audio)
     final_clip = final_clip.set_duration(audio.duration + (len(text_arr) * .35))
 
@@ -40,8 +40,8 @@ def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
     audio_index = 1
     for sentence in text_arr:
         # Create the audio clip
-        print("audio path: " + path_to_audio + "Sentence" + str(audio_index) + '.mp3')
-        audio_clip = AudioFileClip(path_to_audio + "Sentence" + str(audio_index) + '.mp3', fps = 20)
+        print("audio path: " + path_to_audio + "/Sentence" + str(audio_index) + '.mp3')
+        audio_clip = AudioFileClip(path_to_audio + "/Sentence" + str(audio_index) + '.mp3', fps = 20)
         
         #add necessary newlines
         modified_text = ''
@@ -73,7 +73,7 @@ def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
         audio_index += 1
 
     # Write the final video to disk
-    final_clip.write_videofile("resources/Result/"+final_video, fps=24, threads=16, audio_codec="aac") 
+    final_clip.write_videofile(os.path.join(basedir, "resources", "Result", final_video), fps=24, threads=16, audio_codec="aac") 
     clip1.close()
     clip2.close()
 

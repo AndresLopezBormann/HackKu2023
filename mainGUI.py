@@ -1,6 +1,7 @@
 
 # Import system
 import sys
+import os
 
 # Import QtCore and QtWidgets
 from PyQt6.QtCore import QUrl, Qt
@@ -16,6 +17,8 @@ from YoutubeDownloader import YoutubeDownloader
 from VideoBuilder import BuildVideo
 from TextToSpeech import TextToSpeech
 from SentenceSplitter import SentenceSplitter
+
+basedir = os.path.dirname(__file__)
 
 # Create a layout for Home Page
 class HomeWidget(QWidget):
@@ -262,7 +265,7 @@ class FinalVideoWidget(QWidget):
 
         # Create movie 
         self.media_player = QMediaPlayer()
-        self.media_player.setSource(QUrl.fromLocalFile("resources/Result/final_video.mp4"))
+        self.media_player.setSource(QUrl.fromLocalFile(os.path.join(basedir, "resources", "Result", "final_video.mp4")))
         self.video_widget = QVideoWidget()
         
         self.media_player.setVideoOutput(self.video_widget)
@@ -459,7 +462,7 @@ class MainWindow(QMainWindow):
         YoutubeDownloader(youtube_url)
 
         # Build Video
-        BuildVideo(f'resources/Images/{voice}.jpg', 'resources/Mp4/BackgroundVideo.mp4', content_list, 'resources/Mp3/', 'final_video.mp4' )
+        BuildVideo(os.path.join(basedir, "resources", "Images", f"{voice}.jpg"),  os.path.join(basedir, "resources", "Mp4", "BackgroundVideo.mp4"), content_list, os.path.join(basedir, "resources", "Mp3"), 'final_video.mp4' )
 
         # Remove central widget
         self.central_widget.removeWidget(self.final_video_widget)
@@ -474,12 +477,8 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     # Set Application
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("RACER.png"))
-
-    # Set Icon
-    trayIcon = QSystemTrayIcon(QIcon('RACER.png'), parent=app)
-    trayIcon.show()
-
+    app.setWindowIcon(QIcon(os.path.join(basedir, "resources", "Images", "RACER.png")))
+    
     # Set Window
     window = MainWindow()
     window.show()
