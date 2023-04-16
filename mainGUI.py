@@ -12,6 +12,10 @@ from PyQt6.QtGui import QIcon, QFont
 # Import functions from other classes
 from RedditGetter import GetRedditPost
 from ChatGPT import ChatGPT_Prompt
+from YoutubeDownloader import YoutubeDownloader
+from VideoBuilder import BuildVideo
+from TextToSpeech import TextToSpeech
+from SentenceSplitter import SentenceSplitter
 
 # Create a layout for Home Page
 class HomeWidget(QWidget):
@@ -258,7 +262,7 @@ class FinalVideoWidget(QWidget):
 
         # Create movie 
         self.media_player = QMediaPlayer()
-        self.media_player.setSource(QUrl.fromLocalFile("final_video.mp4"))
+        self.media_player.setSource(QUrl.fromLocalFile("resources/Result/final_video.mp4"))
         self.video_widget = QVideoWidget()
         
         self.media_player.setVideoOutput(self.video_widget)
@@ -362,7 +366,6 @@ class MainWindow(QMainWindow):
         self.central_widget.addWidget(self.voice_video_widget)
         self.central_widget.addWidget(self.final_video_widget)
     
-
     # Make text with prompt 
     def makeText(self, content, prompt):
         # Make edited post by modifying result using the chat gpt prompt
@@ -441,11 +444,32 @@ class MainWindow(QMainWindow):
         # Get the youtube url for video
         youtube_url = self.voice_video_widget.youtube_url
 
-        print(content)
-        print(voice)
-        print(youtube_url)
+        # Split content into sentences
+        content_list = SentenceSplitter(content)
 
-        
+        # Go through each senetence in concent
+        for i in range(len(content_list)):
+            # Convert text to speech
+            TextToSpeech(voice_name=voice, text=content_list[i], Filename="Sentence"+str(i+1))
+
+        # Convert entire text to speech
+        TextToSpeech(voice_name=voice, text=content,  Filename="FullAudio")
+
+        # Get the video
+        YoutubeDownloader(youtube_url)
+
+        # Build Video
+        BuildVideo(f'resources/Images/{voice}.jpg', 'resources/Mp4/BackgroundVideo.mp4', content_list, 'resources/Mp3/', 'final_video.mp4' )
+
+        # Remove central widget
+        self.central_widget.removeWidget(self.final_video_widget)
+        self.final_video_widget = FinalVideoWidget(self)
+        self.final_video_widget.back_button.clicked.connect(lambda: self.switchPage(2))
+        self.final_video_widget.new_video_button.clicked.connect(lambda: self.switchPage(0))
+        self.central_widget.addWidget(self.final_video_widget)
+       
+        # Once video finishes switch to page 4
+        self.central_widget.setCurrentIndex(3)
 # Main Function
 if __name__ == "__main__":
     # Set Application
