@@ -350,6 +350,9 @@ class MainWindow(QMainWindow):
         # Create New Video Button
         self.final_video_widget.new_video_button.clicked.connect(lambda: self.switchPage(0))
 
+        # Create video 
+        self.voice_video_widget.create_video_button.clicked.connect(self.createVideo)
+
         # Continue Buttons
         self.final_text_widget.continueButton.clicked.connect(lambda: self.switchPage(2))
 
@@ -364,7 +367,7 @@ class MainWindow(QMainWindow):
     def makeText(self, content, prompt):
         # Make edited post by modifying result using the chat gpt prompt
         edited_post = ChatGPT_Prompt(prompt, content)
-        edited_post = edited_post['choices'][0]['text']
+        edited_post = edited_post['choices'][0]['message']["content"]
 
        # Splited edited post with new lines
         edited_post_list = edited_post.split("\n")
@@ -426,6 +429,22 @@ class MainWindow(QMainWindow):
     def switchPage(self, i):
         # Switch to page based on i
         self.central_widget.setCurrentIndex(i)
+
+    # Create the Video
+    def createVideo(self):
+        # Get the content for video
+        content = self.final_text_widget.final_text
+
+        # Get the voice for video
+        voice = self.voice_video_widget.choice
+
+        # Get the youtube url for video
+        youtube_url = self.voice_video_widget.youtube_url
+
+        print(content)
+        print(voice)
+        print(youtube_url)
+
         
 # Main Function
 if __name__ == "__main__":
