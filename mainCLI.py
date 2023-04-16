@@ -59,8 +59,8 @@ def main():
     #Creates the Video from the mp4 and mp3 files
     BuildVideo(f'resources/Images/{voice_name[voice_choice]}.jpg', 'resources/Mp4/BackgroundVideo.mp4', text_list, 'resources/Mp3/', 'final_video.mp4')
     
-    #Deletes Mp3 and background Mp4 video
-    # Cleaner()
+    #Deletes Mp3 files and background Mp4 video
+    Cleaner()
 
 
 if __name__ == '__main__':

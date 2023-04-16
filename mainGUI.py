@@ -20,7 +20,7 @@ from SentenceSplitter import SentenceSplitter
 
 
 PRIMARY_COLOR = "#576CBC"
-PRIMARY_ALT_COLOR = "#576CBC"
+PRIMARY_ALT_COLOR = "#303f78"
 BACKGROUND_COLOR = "#BDCDD6"
 LIGHT_COLOR = "#FFFFFF"
 
@@ -339,6 +339,7 @@ class VoiceVideoWidget(QWidget):
 
         # Create list of choices
         voice_name = ["Biden", "Trump", "Freeman", "Rogan", "Musk", "Dumbledore", "Elizabeth", "Ferrell"]
+        voice_nickname = ["Joe Biden", "Donald Trump", "Morgan Freeman", "Joe Rogan", "Elon Musk", "Albus Dumbledore", "Queen Elizabeth II", "Will Ferrell"]
 
         # For i in 8
         for i in range(8):
@@ -347,7 +348,7 @@ class VoiceVideoWidget(QWidget):
             column = (i % 2) + 1
 
             # Get the name
-            name = voice_name[i]
+            name = voice_nickname[i]
 
             # Create a push button
             button = QPushButton(name, self)
@@ -365,7 +366,7 @@ class VoiceVideoWidget(QWidget):
                 "margin-bottom: 10;"
             )
 
-            button.clicked.connect(lambda ch, i=i, name=name: self.updateChoice(name, i))
+            button.clicked.connect(lambda ch, i=i, name=name: self.updateChoice(voice_name[i], i))
         
             # Add button to gridLayer
             self.gridLayout.addWidget(button, row, column, 1, 1)
@@ -388,7 +389,7 @@ class VoiceVideoWidget(QWidget):
                 f"color: {LIGHT_COLOR};"
                 f"background-color: {PRIMARY_ALT_COLOR};"
                 "height: 50;"
-                f"border: 5 solid {PRIMARY_ALT_COLOR};"
+                f"border: 5 solid {PRIMARY_COLOR};"
                 "border-radius: 10;"
                 "margin-top: 10;"
                 "margin-bottom: 10;"
@@ -626,10 +627,10 @@ class MainWindow(QMainWindow):
         for i in range(number_of_comments):
             comments += f"\n{content['comments'][i]['comment_body']}"
         
-        # Forment content in this format
-        # Title: Title Of Post
-        # Body: Body of Post
-        # Comments: Comments on the post
+        # Formats content in this format
+        # title: Title Of Post
+        # body: Body of Post
+        # comments(list): Comments on the post
         Result = f"Title: {content['title']}\nBody: {content['body']}\nComments: {comments}"
     
         # Make text with body and prompt
@@ -681,9 +682,6 @@ class MainWindow(QMainWindow):
         # Build Video
         BuildVideo(f'resources/Images/{voice}.jpg', 'resources/Mp4/BackgroundVideo.mp4', content_list, 'resources/Mp3/', 'final_video.mp4' )
 
-        # Clean up files
-        Cleaner()
-
         # Remove central widget
         self.central_widget.removeWidget(self.final_video_widget)
         self.final_video_widget = FinalVideoWidget(self)
@@ -693,6 +691,9 @@ class MainWindow(QMainWindow):
        
         # Once video finishes switch to page 4
         self.central_widget.setCurrentIndex(3)
+            
+
+
 # Main Function
 if __name__ == "__main__":
     # Set Application
@@ -709,4 +710,7 @@ if __name__ == "__main__":
 
     # Execute App
     app.exec()
+
+    # Clean up files
+    Cleaner()
 

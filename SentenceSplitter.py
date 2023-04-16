@@ -8,7 +8,16 @@ acronyms = "([A-Z][.][A-Z][.](?:[A-Z][.])?)"
 websites = "[.](com|net|org|io|gov|edu|me)"
 digits = "([0-9])"
 
+# https://stackoverflow.com/questions/4576077/how-can-i-split-a-text-into-sentences
 def SentenceSplitter(text):
+    """
+        This function takes in a string of text as input and returns a list of sentences by splitting the text at appropriate sentence 
+        ending markers such as periods, question marks and exclamation points. The function first preprocesses the input text by adding 
+        spaces around the text, replacing line breaks with spaces and replacing certain patterns of characters with markers to aid in 
+        sentence splitting. The function uses regular expressions to identify patterns such as prefixes, websites, acronyms, etc. and 
+        replaces them with appropriate markers. Finally, the function splits the preprocessed text at the "<stop>" marker and returns the 
+        resulting list of sentences.
+    """
     text = " " + text + "  "
     text = text.replace("\n"," ")
     text = re.sub(prefixes,"\\1<prd>",text)

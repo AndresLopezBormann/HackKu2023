@@ -8,6 +8,20 @@ from pathlib import Path
 # currently depends on folder of audio clips of single sentences
 
 def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
+    """
+    Builds a final video by combining two input videos, an audio track, and subtitles, and saves it to the 
+    'resources/Result' folder.
+
+    Args:
+        video1 (str): The path to the first input video.
+        video2 (str): The path to the second input video.
+        text_arr (list): A list of strings representing the subtitles to be added to the final video.
+        path_to_audio (str): The path to the folder containing the audio files.
+        final_video (str): The name of the final video file.
+
+    Returns:
+        Creates a new video at resources/Result/final_video.mp4
+    """
     Path("resources/Result").mkdir(parents=True, exist_ok=True)
     if video1.lower().endswith(('.png', '.jpg', '.jpeg')):
         clip1 = ImageClip(video1)
@@ -76,14 +90,3 @@ def BuildVideo(video1, video2, text_arr, path_to_audio, final_video):
     final_clip.write_videofile("resources/Result/"+final_video, fps=24, threads=16, audio_codec="aac") 
     clip1.close()
     clip2.close()
-
-
-if __name__ == '__main__':
-    # Create the video clip
-    clip1 = VideoFileClip('resources/video.mp4')
-    clip2 = VideoFileClip('resources/video.mp4')
-    sentence_array = SentenceSplitter()
-    path_to_audio = 'resources/Mp3/'
-
-    # Write the final video to disk
-    BuildVideo(clip1, clip2, sentence_array, path_to_audio, 'final_video.mp4')

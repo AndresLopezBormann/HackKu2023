@@ -33,7 +33,10 @@
 </p>
 <br>
 <div align="center">
-<img src="resources/Images/Racer.jpg" alt="Racer" width="600"></a>
+<img src="resources/Images/Racer1.jpg" alt="Racer" width="600"></a>
+<img src="resources/Images/Racer2.jpg" alt="Racer" width="600"></a><br>
+<img src="resources/Images/Racer3.jpg" alt="Racer" width="600"></a>
+<img src="resources/Images/Racer4.jpg" alt="Racer" width="600"></a><br>
 </div>
 <br>
 
@@ -64,7 +67,7 @@ $ cd HackKu2023
 $ pip install -r requirements.txt
 
 # Run the app
-$ python MainCLI.py
+$ python mainGUI.py
 ```
 
 ## Download
