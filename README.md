@@ -26,6 +26,7 @@
 
 
 <p align="center">
+  <a href="#example-uses">Example Uses</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#download">Download</a> •
@@ -39,6 +40,11 @@
 <img src="resources/Images/Racer4.jpg" alt="Racer" width="600"></a><br>
 </div>
 <br>
+
+## Example Uses
+
+* Youtube Videos can be found at:
+  - https://www.youtube.com/playlist?list=PLQ2Rlw4Hf8Py1dRVXOEMrbmgGqGjq9BP-
 
 ## Key Features
 
@@ -68,6 +74,9 @@ $ pip install -r requirements.txt
 
 # Run the app
 $ python mainGUI.py
+
+# The file will be created in the folder "resources/Result/final_video.mp4"
+
 ```
 
 ## Download
