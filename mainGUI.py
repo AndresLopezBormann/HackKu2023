@@ -701,10 +701,10 @@ class MainWindow(QMainWindow):
 if __name__ == "__main__":
     # Set Application
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("RACER.png"))
+    app.setWindowIcon(QIcon("resources/Images/RACER.png"))
 
     # Set Icon
-    trayIcon = QSystemTrayIcon(QIcon('RACER.png'), parent=app)
+    trayIcon = QSystemTrayIcon(QIcon('resources/Images/RACER.png'), parent=app)
     trayIcon.show()
 
     # Set Window
